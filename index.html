@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Enviar mensagem via WhatsApp</title>
+</head>
+<body>
+	<h1>Enviar mensagem via WhatsApp</h1>
+	<form>
+		<label for="telefone">Número do telefone:</label>
+		<input type="text" id="telefone" name="telefone" placeholder="Ex: +55XX999999999">
+		<br><br>
+		<label for="mensagem">Mensagem:</label>
+		<textarea id="mensagem" name="mensagem" placeholder="Digite sua mensagem aqui"></textarea>
+		<br><br>
+		<button type="button" onclick="enviarMensagem()">Enviar mensagem</button>
+	</form>
+	<script>
+		function enviarMensagem() {
+			// Pega o valor dos campos do formulário
+			var telefone = document.getElementById("telefone").value;
+			var mensagem = document.getElementById("mensagem").value;
+			
+			// Remove espaços em branco e caracteres especiais do número de telefone
+			telefone = telefone.replace(/\s/g, "").replace(/\D/g, "");
+			
+			// Cria o link para enviar a mensagem via WhatsApp Web
+			var link = "https://web.whatsapp.com/send?phone=" + telefone + "&text=" + encodeURIComponent(mensagem);
+			
+			// Abre uma nova janela com o link do WhatsApp Web
+			window.open(link);
+		}
+	</script>
+</body>
+</html>
