@@ -1,35 +1,49 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="UTF-8">
-	<title>Enviar mensagem via WhatsApp</title>
-</head>
-<body>
-	<h1>Enviar mensagem via WhatsApp</h1>
-	<form>
-		<label for="telefone">Número do telefone:</label>
-		<input type="text" id="telefone" name="telefone" placeholder="Ex: +55XX999999999">
-		<br><br>
-		<label for="mensagem">Mensagem:</label>
-		<textarea id="mensagem" name="mensagem" placeholder="Digite sua mensagem aqui"></textarea>
-		<br><br>
-		<button type="button" onclick="enviarMensagem()">Enviar mensagem</button>
-	</form>
-	<script>
-		function enviarMensagem() {
-			// Pega o valor dos campos do formulário
-			var telefone = document.getElementById("telefone").value;
-			var mensagem = document.getElementById("mensagem").value;
-			
-			// Remove espaços em branco e caracteres especiais do número de telefone
-			telefone = telefone.replace(/\s/g, "").replace(/\D/g, "");
-			
-			// Cria o link para enviar a mensagem via WhatsApp Web
-			var link = "https://web.whatsapp.com/send?phone=" + telefone + "&text=" + encodeURIComponent(mensagem);
-			
-			// Abre uma nova janela com o link do WhatsApp Web
-			window.open(link);
-		}
-	</script>
-</body>
+	<head>
+		<meta charset="UTF-8">
+		<title>Grupo DLD - Envio de mensagens via Web WhatsApp</title>
+		<script>
+			function preencherMensagem() {
+				// Seleciona o elemento select
+				var select = document.getElementById("opcoes");
+
+				// Obtém o valor selecionado no select
+				var opcao = select.value;
+
+				// Define o conteúdo da mensagem com base na opção selecionada
+				var mensagem = "";
+				if (opcao === "opcao1") {
+					mensagem = "Sou o [PREENCHA] da DLD TIM/ EMPRESAS e encontrei o seu contato por meio de nossos cadastros internos. Vi que você tem plano empresarial com uma colega operadora. Aqui na DLD TIM EMPRESAS oferecemos planos que lhe ajudam a otimizar suas atividades, contando também com linhas fixas e internet móvel que pode trazer maior autonomia a sua empresa e economia. O que acha de conversarmos sobre como a DLD TIM EMPRESAS pode ajudar a [PREENCHA] em melhorar seus planos coorporativos, no dia [PREENCHA] às [PREENCHA], vou até você para mostrar nosso portifólio. Aguardo seu retorno.";
+				} else if (opcao === "opcao2") {
+					mensagem = "Mensagem da opção 2";
+				} else if (opcao === "opcao3") {
+					mensagem = "Mensagem da opção 3";
+				}
+
+				// Seleciona o elemento textarea e define o valor
+				var textarea = document.getElementById("mensagem");
+				textarea.value = mensagem;
+			}
+		</script>
+	</head>
+	<body>
+		<h1>Envio de mensagens via web WhatsApp</h1>
+		<form action="https://web.whatsapp.com/send?phone=55" method="get">
+			<label for="telefone">Telefone (DDD + Telefone):</label>
+			<input type="text" id="telefone" name="phone">
+			<br>
+			<label for="mensagem">Mensagem:</label>
+			<select id="opcoes" name="opcoes" onchange="preencherMensagem()">
+				<option value="">Selecione uma opção</option>
+				<option value="opcao1">Cliente de Outra Operadora</option>
+				<option value="opcao2">Opção 2</option>
+				<option value="opcao3">Opção 3</option>
+			</select>
+			<br>
+			<textarea id="mensagem" name="text" rows="20" cols="50"></textarea>
+			<br>
+			<button type="submit">Enviar mensagem</button>
+		</form>
+	</body>
 </html>
